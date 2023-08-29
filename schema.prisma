@@ -1,0 +1,46 @@
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  posts Post[]
+}
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean @default(false)
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  Int
+}
+
+//import {getConfig} from '@prisma/sdk'
+
+model Bebe {
+  nomebebe String 
+  CPF String @id @unique 
+  data_nasb DateTime  @default(now())
+  peso_nas Int
+  altura Float
+  mae Mae @relation(fields: [maenome], references: [CPF])
+  maenome String
+  medico Medico @relation(fields: [mednome], references: [CRM])
+  mednome String
+}
+
+model Mae {
+  nomemae String
+  CPF String @id @unique
+  data_nasm DateTime  @default(now())
+  endereco String 
+  telefone String @unique
+  bebes Bebe[]
+}
+
+model Medico {
+  nomemedico String 
+  CRM String @id @unique
+  telefone String @unique
+  especialidade String 
+  bebes Bebe[]
+}
