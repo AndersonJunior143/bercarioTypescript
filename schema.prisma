@@ -1,4 +1,11 @@
-//import {getConfig} from '@prisma/sdk'
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
 
 model Bebe {
   nomebebe String 
